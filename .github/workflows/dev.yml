@@ -1,0 +1,18 @@
+name: Dev
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: fake build
+        run: |
+          printf "Git head: %s\n\n" "$(git rev-list HEAD)"
