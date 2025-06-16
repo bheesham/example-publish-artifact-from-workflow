@@ -16,4 +16,4 @@ jobs:
       - uses: actions/checkout@v4
       - name: fake build
         run: |
-          printf "Git head: %s\n\n" "$(git rev-list HEAD)"
+          printf "Git head: %s\n\n" "$(git rev-parse --short HEAD)"
