@@ -13,6 +13,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: fake build
         run: |
           printf "Git head: %s\n\n" "$(git rev-list HEAD)"
