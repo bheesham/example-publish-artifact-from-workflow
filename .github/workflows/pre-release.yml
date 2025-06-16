@@ -1,0 +1,30 @@
+name: Dev
+
+# DEBT(bhee): quoting the github docs,
+#
+#     The prereleased type will not trigger for pre-releases published from
+#     draft releases, but the published type will trigger. If you want a
+#     workflow to run when stable and pre-releases publish, subscribe to
+#     published instead of released and prereleased.
+#
+# via: https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#release
+#
+# so, our workaround is to just not use drafts. Commit to your deployments!
+on:
+  release:
+    types:
+      - prereleased
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: fake build
+        run: |
+          printf "Git head: %s\n\n" "$(git rev-parse --short HEAD)"
