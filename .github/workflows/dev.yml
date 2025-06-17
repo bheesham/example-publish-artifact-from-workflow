@@ -20,5 +20,5 @@ jobs:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
         run: |
           echo Git head: "$(git rev-parse --short HEAD)"
-          echo GitHub Event ("$GITHUB_EVENT_NAME"):
+          echo GitHub Event "$GITHUB_EVENT_NAME":
           echo "$GITHUB_EVENT" | jq -aM
