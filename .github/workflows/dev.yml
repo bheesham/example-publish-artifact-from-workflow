@@ -15,5 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: fake build
+        env:
+          GITHUB_EVENT: ${{ toJson(github.event) }}
         run: |
-          printf "Git head: %s\n\n" "$(git rev-parse --short HEAD)"
+          echo Git head: "$(git rev-parse --short HEAD)"
+          echo GitHub Event:
+          echo "$GITHUB_EVENT" | jq -aM
